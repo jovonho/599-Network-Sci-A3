@@ -23,8 +23,6 @@ def load_real_label(dataset, add_val_to_test):
 
 
 def load_real_classic(dataset):
-	print(f"\nDataset {dataset}")
-
 	G = Graph.Read_GML(f"./data/real-classic/{dataset}.gml")
 	G = G.to_networkx()
 
@@ -47,8 +45,6 @@ def load_real_classic(dataset):
 
 	n_communities = len(np.unique(labels_true))
 
-	print(f"Real number of communities: {n_communities}")
-
 	if is_directed(G):
 		G = to_undirected(G)
 
@@ -58,39 +54,43 @@ def load_real_classic(dataset):
 
 def q1_real_classic():
 	rng = np.random.default_rng()
-	datasets = [ "polbooks", "karate", "football", "polblogs", "strike"]
+	datasets = ["polbooks", "karate", "football", "polblogs", "strike"]
 
 	algos = [local_and_global_consistency, harmonic_function]
 
 	for dataset in datasets:
 
+		G, labels_true, _ = load_real_classic(dataset)
+		print(f"Dataset: {dataset}\n")
+
 		for algo in algos:
+
+			print(f"Algorithm: {algo.__name__}")
 
 			dirname = f"./results/q1_{algo.__name__}"
 			pathlib.Path(dirname).mkdir(parents=True, exist_ok=True)
 
 			with open(f"{dirname}/{dataset}.txt", "w") as outfile:
-			
-				G, labels_true, _ = load_real_classic(dataset)
 
-				outfile.write(f"Number of nodes: {len(labels_true)}\n")
-
+				outfile.write(f"Number of nodes: {len(labels_true)}\n\n")
 				num_nodes = len(labels_true)
-				print(num_nodes)
 
 				NMIs = []
 				ARIs = []
 				Accs = []
+
+				print("{:21}\t{:12}\t{:12}\t{:12}".format("Unlabelled Nodes (%)", "Accuracy", "NMI", "ARI"))
+				outfile.write("{:21}\t{:12}\t{:12}\t{:12}\n".format("Unlabelled Nodes (%)", "Accuracy", "NMI", "ARI"))
+
 				for n in range(5, 100, 5):	
 
 					portion_drop =  n/100
 					test_size = round(num_nodes * portion_drop)
 
-					train_size = num_nodes - test_size
+					# train_size = num_nodes - test_size
 
-					print(f"Dropping {n}% of labels. Test set size: {test_size}")
-					outfile.write(f"Dropping {n}% of labels. Test set size: {test_size}\n")
-					outfile.write(f"Labelled nodes: {train_size} ({round(train_size/len(labels_true),2) * 100 }%)\n")
+					# outfile.write(f"Dropping {n}% of labels. Test set size: {test_size}\n")
+					# outfile.write(f"Labelled nodes: {train_size} ({round(train_size/len(labels_true),2) * 100 }%)\n")
 
 					# Repeat 10 times for each test set size
 					nmi = []
@@ -105,7 +105,7 @@ def q1_real_classic():
 						test_idx = np.sort(test_idx)
 
 						# Extract test set labels
-						y_test = np.array(labels_true)[test_idx]
+						y_test = labels_true[test_idx]
 
 						# Delete labels of test set in the graph
 						for i in test_idx:
@@ -120,49 +120,52 @@ def q1_real_classic():
 						ari.append(adjusted_rand_score(y_test, y_pred))
 						acc.append(accuracy_score(y_test, y_pred))
 
-					NMI = np.mean(nmi)
-					ARI = np.mean(ari)
-					Acc = np.mean(acc)
-					print(f"\tNMI: {NMI}\n\tARI: {ARI}\n\tAcc: {Acc}\n")
-					outfile.write(f"\tNMI: {NMI}\n\tARI: {ARI}\n\tAcc: {Acc}\n\n")
+					NMI = round(np.mean(nmi), 4)
+					ARI = round(np.mean(ari), 4)
+					Acc = round(np.mean(acc), 4)
+
+					test_size_pct = round(test_size/len(labels_true) * 100, 2)
+
+					print("{:5} ({:3}%)\t{:15}\t{:12}\t{:12}".format(test_size, test_size_pct, Acc, NMI, ARI))
+					outfile.write("{:5} ({:3}%)\t{:15}\t{:12}\t{:12}\n".format(test_size, test_size_pct, Acc, NMI, ARI))
 
 					NMIs.append(NMI)
 					ARIs.append(ARI)
 					Accs.append(Acc)
 
-			# fig, ax = plt.subplots(figsize=(9,6))
-			# x_axis = [x for x in range(5, 100, 5)]
+			fig, ax = plt.subplots(figsize=(9,6))
+			x_axis = [x for x in range(5, 100, 5)]
 
-			# ax.plot(x_axis, Accs, c='pink', label='Accuracy')
-			# ax.plot(x_axis, ARIs, c='orange', label='ARI')
-			# ax.plot(x_axis, NMIs, c='purple', label='NMI')
+			ax.plot(x_axis, Accs, c='pink', label='Accuracy')
+			ax.plot(x_axis, ARIs, c='orange', label='ARI')
+			ax.plot(x_axis, NMIs, c='purple', label='NMI')
 
-			# ax.set_xlabel("Test Set Size (%)")
-			# ax.set_ylabel("Score")
-			# ax.legend()
+			ax.set_xlabel("Test Set Size (%)")
+			ax.set_ylabel("Score")
+			ax.legend()
 
-			# # Major ticks every 20, minor ticks every 5
-			# x_major_ticks = np.arange(0, 101, 20)
-			# x_minor_ticks = np.arange(0, 101, 5)
-			# y_major_ticks = np.arange(0, 1, .2)
-			# y_minor_ticks = np.arange(0, 1, .05)
+			# Major ticks every 20, minor ticks every 5
+			x_major_ticks = np.arange(0, 101, 20)
+			x_minor_ticks = np.arange(0, 101, 5)
+			y_major_ticks = np.arange(0, 1, .2)
+			y_minor_ticks = np.arange(0, 1, .05)
 
-			# ax.set_xticks(x_major_ticks)
-			# ax.set_xticks(x_minor_ticks, minor=True)
-			# ax.set_yticks(y_major_ticks)
-			# ax.set_yticks(y_minor_ticks, minor=True)
+			ax.set_xticks(x_major_ticks)
+			ax.set_xticks(x_minor_ticks, minor=True)
+			ax.set_yticks(y_major_ticks)
+			ax.set_yticks(y_minor_ticks, minor=True)
 			
-			# ax.grid(True, which='both', linestyle='--')
-			# ax.tick_params(which='both', direction="in", grid_color='grey', grid_alpha=0.2)
+			ax.grid(True, which='both', linestyle='--')
+			ax.tick_params(which='both', direction="in", grid_color='grey', grid_alpha=0.2)
 
-			# fig.suptitle(f"Local and Global Consistency Node Prediction Performance for \"{dataset}\" Dataset")
-			# fig.tight_layout()
+			fig.suptitle(f"Local and Global Consistency Node Prediction Performance for \"{dataset}\" Dataset")
+			fig.tight_layout()
 
-			# dirname = f"./figs/q1_{algo.__name__}"
-			# pathlib.Path(dirname).mkdir(parents=True, exist_ok=True)
+			dirname = f"./figs/q1_{algo.__name__}"
+			pathlib.Path(dirname).mkdir(parents=True, exist_ok=True)
 
-			# fig.savefig(f"{dirname}/{dataset}.png", format="png")
-			# plt.close()
+			fig.savefig(f"{dirname}/{dataset}.png", format="png")
+			plt.close()
 
 
 def q1_real_label():
@@ -183,7 +186,7 @@ def q1_real_label():
 				for add_val in [False, True]:
 
 					G, labels_true, test_idx, train_size = load_real_label(dataset, add_val)
-					outfile.write(f"Number of nodes: {len(labels_true)}\n")
+					outfile.write(f"Number of nodes: {len(labels_true)}\n\n")
 					outfile.write(f"Labelled nodes: {train_size} ({round(train_size/len(labels_true),3) * 100 }%)\n")
 
 					train_sizes.append(train_size)
@@ -221,41 +224,41 @@ def q1_real_label():
 					Accs.append(Acc)
 
 
-			# fig, ax = plt.subplots(figsize=(9,6))
-			# x_axis = [str(x) for x in train_sizes]
+			fig, ax = plt.subplots(figsize=(9,6))
+			x_axis = [str(x) for x in train_sizes]
 
-			# ax.plot(x_axis, Accs, c='pink', label='Accuracy')
-			# ax.plot(x_axis, ARIs, c='orange', label='ARI')
-			# ax.plot(x_axis, NMIs, c='purple', label='NMI')
+			ax.plot(x_axis, Accs, c='pink', label='Accuracy')
+			ax.plot(x_axis, ARIs, c='orange', label='ARI')
+			ax.plot(x_axis, NMIs, c='purple', label='NMI')
 
-			# ax.set_xlabel("Test Set Size (%)")
-			# ax.set_ylabel("Score")
-			# ax.legend()
+			ax.set_xlabel("Test Set Size (%)")
+			ax.set_ylabel("Score")
+			ax.legend()
 
-			# # Major ticks every 20, minor ticks every 5
-			# y_major_ticks = np.arange(0, 1, .2)
-			# y_minor_ticks = np.arange(0, 1, .05)
+			# Major ticks every 20, minor ticks every 5
+			y_major_ticks = np.arange(0, 1, .2)
+			y_minor_ticks = np.arange(0, 1, .05)
 
-			# ax.set_yticks(y_major_ticks)
-			# ax.set_yticks(y_minor_ticks, minor=True)
+			ax.set_yticks(y_major_ticks)
+			ax.set_yticks(y_minor_ticks, minor=True)
 			
-			# ax.grid(True, which='both', linestyle='--')
-			# ax.tick_params(which='both', direction="in", grid_color='grey', grid_alpha=0.2)
+			ax.grid(True, which='both', linestyle='--')
+			ax.tick_params(which='both', direction="in", grid_color='grey', grid_alpha=0.2)
 
-			# fig.suptitle(f"Local and Global Consistency Node Prediction Performance for \"{dataset}\" Dataset")
-			# fig.tight_layout()
+			fig.suptitle(f"Local and Global Consistency Node Prediction Performance for \"{dataset}\" Dataset")
+			fig.tight_layout()
 
-			# dirname = f"./figs/q1_{algo.__name__}"
-			# pathlib.Path(dirname).mkdir(parents=True, exist_ok=True)
+			dirname = f"./figs/q1_{algo.__name__}"
+			pathlib.Path(dirname).mkdir(parents=True, exist_ok=True)
 
-			# fig.savefig(f"{dirname}/{dataset}.png", format="png")
-			# plt.close()
+			fig.savefig(f"{dirname}/{dataset}.png", format="png")
+			plt.close()
 
 
 
 if __name__=='__main__':
 	q1_real_classic()
-	q1_real_label()
+	# q1_real_label()
 	
 
 
