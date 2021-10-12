@@ -1,0 +1,12 @@
+Number of nodes: 3327
+Labelled nodes: 120 (3.5999999999999996%)
+	NMI: 0.2838897133832221
+	ARI: 0.24085968751203954
+	Acc: 0.577
+
+Number of nodes: 3327
+Labelled nodes: 620 (18.6%)
+	NMI: 0.3342938845134723
+	ARI: 0.3148649642088869
+	Acc: 0.635
+

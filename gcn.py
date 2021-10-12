@@ -52,15 +52,6 @@ def load_data(dataset_str, add_val_to_test=False):
     test_idx_reorder = parse_index_file("data/gcn/ind.{}.test.index".format(dataset_str))
     test_idx_range = np.sort(test_idx_reorder)
 
-    print(len(test_idx_range))
-
-    print(f"x {x.shape}")
-    print(f"tx {tx.shape}")
-    print(f"allx {allx.shape}")
-
-    print(f"y {y.shape}")
-    print(f"ty {ty.shape}")
-    print(f"ally {ally.shape}")
 
     if dataset_str == 'citeseer':
         # Fix citeseer dataset (there are some isolated nodes in the graph)
@@ -77,9 +68,6 @@ def load_data(dataset_str, add_val_to_test=False):
 
     labels = np.vstack((ally, ty))
     labels[test_idx_reorder, :] = labels[test_idx_range, :]
-
-    # 3327 * 6
-    print(labels.shape)
 
     idx_test = test_idx_range.tolist()
     idx_train = range(len(y))
@@ -110,15 +98,18 @@ def load_data(dataset_str, add_val_to_test=False):
     # Optionally add the labels of the validation set to the graph as well
     # Effectively adding the validation set to the test set
     if add_val_to_test:
+        train_size = len(idx_train) + len(idx_val)
         for i in idx_val:
             G.nodes[i]['label'] = labels[i]
+    else:
+        train_size = len(idx_train)
 
-    return G, labels, idx_test
+    return G, labels, idx_test, train_size
 
 
 if __name__=='__main__':
 
-    G, labels, idx_test = load_data("citeseer")
+    G, labels, idx_test, _ = load_data("citeseer")
 
     print(G.nodes(data=True))
 

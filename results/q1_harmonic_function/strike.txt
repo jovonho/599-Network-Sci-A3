@@ -1,0 +1,115 @@
+Number of nodes: 24
+Dropping 5% of labels. Test set size: 1
+Labelled nodes: 23 (96.0%)
+	NMI: 1.0
+	ARI: 1.0
+	Acc: 1.0
+
+Dropping 10% of labels. Test set size: 2
+Labelled nodes: 22 (92.0%)
+	NMI: 0.8
+	ARI: 0.8
+	Acc: 0.9
+
+Dropping 15% of labels. Test set size: 4
+Labelled nodes: 20 (83.0%)
+	NMI: 0.834371101848545
+	ARI: 0.8
+	Acc: 0.95
+
+Dropping 20% of labels. Test set size: 5
+Labelled nodes: 19 (79.0%)
+	NMI: 0.8245408284450496
+	ARI: 0.7564102564102565
+	Acc: 0.9400000000000001
+
+Dropping 25% of labels. Test set size: 6
+Labelled nodes: 18 (75.0%)
+	NMI: 0.9362846306229384
+	ARI: 0.8729946524064172
+	Acc: 0.9666666666666668
+
+Dropping 30% of labels. Test set size: 7
+Labelled nodes: 17 (71.0%)
+	NMI: 0.8343427625577648
+	ARI: 0.7304227304227304
+	Acc: 0.9285714285714286
+
+Dropping 35% of labels. Test set size: 8
+Labelled nodes: 16 (67.0%)
+	NMI: 0.8796289904287729
+	ARI: 0.8535807468085193
+	Acc: 0.9625
+
+Dropping 40% of labels. Test set size: 10
+Labelled nodes: 14 (57.99999999999999%)
+	NMI: 0.9068183904868427
+	ARI: 0.8604120275603881
+	Acc: 0.96
+
+Dropping 45% of labels. Test set size: 11
+Labelled nodes: 13 (54.0%)
+	NMI: 0.9174389902410013
+	ARI: 0.8869807241723432
+	Acc: 0.9363636363636363
+
+Dropping 50% of labels. Test set size: 12
+Labelled nodes: 12 (50.0%)
+	NMI: 0.9280726737460633
+	ARI: 0.910596444878385
+	Acc: 0.95
+
+Dropping 55% of labels. Test set size: 13
+Labelled nodes: 11 (46.0%)
+	NMI: 0.9181862356704287
+	ARI: 0.8942582051991433
+	Acc: 0.9692307692307693
+
+Dropping 60% of labels. Test set size: 14
+Labelled nodes: 10 (42.0%)
+	NMI: 0.9370010926793405
+	ARI: 0.9197709759028372
+	Acc: 0.9785714285714286
+
+Dropping 65% of labels. Test set size: 16
+Labelled nodes: 8 (33.0%)
+	NMI: 0.8352990534291503
+	ARI: 0.7843051371901523
+	Acc: 0.9125
+
+Dropping 70% of labels. Test set size: 17
+Labelled nodes: 7 (28.999999999999996%)
+	NMI: 0.7602300765335248
+	ARI: 0.6765644173411833
+	Acc: 0.8176470588235294
+
+Dropping 75% of labels. Test set size: 18
+Labelled nodes: 6 (25.0%)
+	NMI: 0.747768249542794
+	ARI: 0.6767665958442847
+	Acc: 0.8277777777777777
+
+Dropping 80% of labels. Test set size: 19
+Labelled nodes: 5 (21.0%)
+	NMI: 0.7622320384715063
+	ARI: 0.6843756560587787
+	Acc: 0.8368421052631578
+
+Dropping 85% of labels. Test set size: 20
+Labelled nodes: 4 (17.0%)
+	NMI: 0.5495937795135162
+	ARI: 0.4058531085607129
+	Acc: 0.665
+
+Dropping 90% of labels. Test set size: 22
+Labelled nodes: 2 (8.0%)
+	NMI: 0.6208120447660506
+	ARI: 0.5405348311462225
+	Acc: 0.65
+
+Dropping 95% of labels. Test set size: 23
+Labelled nodes: 1 (4.0%)
+	NMI: 0.0
+	ARI: 0.0
+	Acc: 0.32173913043478264
+
