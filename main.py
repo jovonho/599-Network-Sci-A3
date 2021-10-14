@@ -1,21 +1,16 @@
-﻿import json
-from os import remove, replace
-import time
+﻿import time
 from igraph import Graph
-from networkx.readwrite.edgelist import generate_edgelist
 import numpy as np
-from numpy.lib.shape_base import split
 from sklearn import metrics
 import gcn
 from networkx.algorithms.node_classification import local_and_global_consistency, harmonic_function
-from networkx.classes.function import is_directed, to_undirected, to_directed
-from sklearn.metrics import roc_auc_score, adjusted_rand_score, accuracy_score
+from networkx.classes.function import is_directed, to_undirected
+from sklearn.metrics import roc_auc_score, accuracy_score
 import matplotlib.pyplot as plt
 import gcn
 import pathlib
 import networkx as nx
 from networkx.algorithms.link_prediction import *
-from networkx.algorithms.components import is_connected
 from sklearn.linear_model import LogisticRegression
 
 
@@ -32,8 +27,8 @@ def load_real_classic(dataset):
 	G = Graph.Read_GML(f"./data/real-classic/{dataset}.gml")
 	G = G.to_networkx()
 
-	# Polbooks dataset has string labels which throws a ValueError when we 
-	# try the first line. We convert it to int using ord().
+	# Polbooks dataset has string labels.
+	# COnvert them to int
 	if dataset == 'polbooks':
 		polbooks_map = {
 			'l': 1,
@@ -44,10 +39,11 @@ def load_real_classic(dataset):
 			prev = G.nodes[node]['value']
 			G.nodes[node]['value'] = polbooks_map[prev]
 
-	try:
-		labels_true = [ int(G.nodes[node]['value']) for node in G.nodes ]
-	except ValueError:
-		labels_true = [ ord(G.nodes[node]['value']) for node in G.nodes ]
+	labels_true = [ int(G.nodes[node]['value']) for node in G.nodes ]
+	# try:
+	# 	labels_true = [ int(G.nodes[node]['value']) for node in G.nodes ]
+	# except ValueError:
+	# 	labels_true = [ ord(G.nodes[node]['value']) for node in G.nodes ]
 
 	n_communities = len(np.unique(labels_true))
 
@@ -252,7 +248,7 @@ def q1_real_classic_stacking():
 
 
 
-# This verison kept the exact same split as the GCN paper
+# This version kept the exact same split as the GCN paper
 # Since the split was fixed, we couldn't take the average score over 10 iterations
 def q1_real_label_old():
 	datasets = ["citeseer", "cora", "pubmed"]
@@ -521,7 +517,7 @@ def create_output_directories(question):
 
 
 
-def q2_combo():
+def q2():
 
 	rng = np.random.default_rng()
 	datasets_label = ["citeseer", "cora", "pubmed"]
@@ -829,7 +825,7 @@ def q2_stacking():
 			results_file.write("{:25}\t{:<15}\n".format("Stacking model", mean_auc))
 
 
-def q2_stacking_v2():
+def q2_stacking_global():
 	# This stacking model is trained over all datasets
 	datasets_label = ["citeseer", "cora", "pubmed"]
 	datasets_classic = ["strike", "karate", "polblogs", "polbooks", "football"]
@@ -910,16 +906,10 @@ def q2_stacking_v2():
 			# Append truth values to our list of truths
 			dataset_y_meta_train = np.append(dataset_y_meta_train, y_true)
 
-			print(dataset_X_meta_train.shape)
-			print(dataset_y_meta_train.shape)
-
 		# Stack these predictions as new samples
 		X_meta_train = np.row_stack((X_meta_train, dataset_X_meta_train))
 		# Append truth values to our list of truths
 		y_meta_train = np.append(y_meta_train, dataset_y_meta_train)
-
-		print(X_meta_train.shape)
-		print(y_meta_train.shape)
 
 
 	# Train the Meta model
@@ -1000,14 +990,14 @@ def q2_stacking_v2():
 
 
 if __name__=='__main__':
-	# q1_real_classic()
+	q1_real_classic()
 	q1_real_classic_stacking()
 
-	# q1_real_label_old()
+	q1_real_label_old()
 	q1_real_label_stacking()
 
-	# q2_combo()
-	# q2_stacking()
-	# q2_stacking_v2()
+	q2()
+	q2_stacking()
+	q2_stacking_global()
 	
 
