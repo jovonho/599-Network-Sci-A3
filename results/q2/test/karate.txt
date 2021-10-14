@@ -1,0 +1,11 @@
+karate N=34, E=78
+
+Algorithm                		Mean AUC       		Runtime
+resource_allocation_index		0.6984         		0.002s
+jaccard_coefficient      		0.6088         		0.002s
+adamic_adar_index        		0.7067         		0.002s
+preferential_attachment  		0.6903         		0.002s
+cn_soundarajan_hopcroft  		0.6949         		0.002s
+ra_index_soundarajan_hopcroft		0.7046         		0.002s
+within_inter_cluster     		0.6427         		0.002s
+common_neighbor_centrality		0.7286         		0.003s

@@ -1,0 +1,11 @@
+football N=115, E=613
+
+Algorithm                		Mean AUC       		Runtime
+resource_allocation_index		0.836          		0.015s
+jaccard_coefficient      		0.853          		0.015s
+adamic_adar_index        		0.8412         		0.015s
+preferential_attachment  		0.3053         		0.011s
+cn_soundarajan_hopcroft  		0.8308         		0.015s
+ra_index_soundarajan_hopcroft		0.8025         		0.012s
+within_inter_cluster     		0.8018         		0.012s
+common_neighbor_centrality		0.8439         		0.042s

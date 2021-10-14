@@ -1,0 +1,11 @@
+strike N=24, E=38
+
+Algorithm                		Mean AUC       		Runtime
+resource_allocation_index		0.6643         		0.001s
+jaccard_coefficient      		0.7            		0.002s
+adamic_adar_index        		0.6786         		0.001s
+preferential_attachment  		0.4571         		0.001s
+cn_soundarajan_hopcroft  		0.6929         		0.001s
+ra_index_soundarajan_hopcroft		0.7398         		0.001s
+within_inter_cluster     		0.7776         		0.001s
+common_neighbor_centrality		0.7541         		0.002s

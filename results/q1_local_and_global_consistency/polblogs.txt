@@ -1,3 +1,0 @@
-Number of nodes: 1490
-
-Unlabelled Nodes (%) 	Accuracy    	NMI         	ARI         

@@ -1,0 +1,8 @@
+Algorithm                	Mean AUC       	Runtime
+resource_allocation_index	0.6356         	31.37s
+jaccard_coefficient      	0.635          	30.97s
+preferential_attachment  	0.7166         	30.98s
+cn_soundarajan_hopcroft  	0.6355         	30.48s
+ra_index_soundarajan_hopcroft	0.6345         	30.8s
+within_inter_cluster     	0.6337         	30.89s
+adamic_adar_index        		0.6352         		29.22s

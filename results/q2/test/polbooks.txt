@@ -1,0 +1,11 @@
+polbooks N=105, E=441
+
+Algorithm                		Mean AUC       		Runtime
+resource_allocation_index		0.8777         		0.011s
+jaccard_coefficient      		0.8405         		0.011s
+adamic_adar_index        		0.8638         		0.011s
+preferential_attachment  		0.6518         		0.008s
+cn_soundarajan_hopcroft  		0.875          		0.011s
+ra_index_soundarajan_hopcroft		0.8027         		0.01s
+within_inter_cluster     		0.8054         		0.01s
+common_neighbor_centrality		0.8863         		0.028s

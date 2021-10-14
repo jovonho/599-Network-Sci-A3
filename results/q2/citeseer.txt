@@ -1,0 +1,4 @@
+citeseer N=3327, E=4676
+
+Algorithm                	Mean AUC       	Runtime
+adamic_adar_index        		0.6531         		0.5s

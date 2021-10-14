@@ -1,0 +1,2 @@
+Unlabelled Nodes (%) 	LGC        Harmonic  
+19157 (97.16%)	      0.7874	  0.7781

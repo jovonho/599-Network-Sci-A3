@@ -1,0 +1,10 @@
+polblogs N=1490, E=16718
+
+Algorithm                		Mean AUC       		Runtime
+resource_allocation_index		0.9346         		1.326s
+jaccard_coefficient      		0.9003         		1.328s
+adamic_adar_index        		0.9336         		1.319s
+preferential_attachment  		0.9323         		0.912s
+cn_soundarajan_hopcroft  		0.9301         		1.308s
+ra_index_soundarajan_hopcroft		0.8947         		1.282s
+within_inter_cluster     		0.8719         		1.213s
