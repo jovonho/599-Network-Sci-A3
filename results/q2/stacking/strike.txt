@@ -1,4 +1,4 @@
 strike N=24, E=38
 
 Algorithm                	Mean AUC       
-Stacking model           	0.7036         
+Stacking model           	0.7071         

@@ -1,0 +1,9 @@
+citeseer N=3327, E=4676
+
+Algorithm                		Mean AUC       		Runtime
+resource_allocation_index	0.6594         	0.499s
+jaccard_coefficient      	0.6584         	0.505s
+preferential_attachment  	0.5801         	0.495s
+cn_soundarajan_hopcroft  	0.6582         	0.505s
+ra_index_soundarajan_hopcroft	0.6179         	0.492s
+within_inter_cluster     	0.6173         	0.498s

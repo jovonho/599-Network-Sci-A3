@@ -99,13 +99,13 @@ def load_data(dataset_str, add_val_to_test=False):
     # Optionally add the labels of the validation set to the graph as well
     # Effectively adding the validation set to the training set
     if add_val_to_test:
-        test_size = len(labels) - (len(idx_train) + len(idx_val))
+        num_unlabelled = len(labels) - (len(idx_train) + len(idx_val))
     else:
-        test_size = len(labels) - len(idx_train)
+        num_unlabelled = len(labels) - len(idx_train)
     
     # print(f"{dataset_str} train: {len(idx_train)} val:{len(idx_val)} test:{len(idx_test)}")
 
-    return G, labels, idx_test, test_size
+    return G, labels, idx_test, num_unlabelled
 
 
 def load_data_fully_labeled(dataset_str):

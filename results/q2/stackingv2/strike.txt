@@ -1,0 +1,2 @@
+Algorithm                	Mean AUC       
+Stacking model v2           	0.5393         

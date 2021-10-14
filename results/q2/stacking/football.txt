@@ -1,0 +1,4 @@
+football N=115, E=613
+
+Algorithm                	Mean AUC       
+Stacking model           	0.8318         

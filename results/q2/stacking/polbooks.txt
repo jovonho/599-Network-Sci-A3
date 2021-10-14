@@ -1,0 +1,4 @@
+polbooks N=105, E=441
+
+Algorithm                	Mean AUC       
+Stacking model           	0.7705         

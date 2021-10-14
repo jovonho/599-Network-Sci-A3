@@ -1,3 +1,2 @@
-polblogs N=1490, E=16718
-
 Algorithm                	Mean AUC       
+Stacking model           	0.7129         
