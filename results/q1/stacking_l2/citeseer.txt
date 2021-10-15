@@ -1,4 +1,0 @@
-Unlabelled Nodes (%) 	Stacked Model
- 2707 (81.36%)	       0.689
-Unlabelled Nodes (%) 	Stacked Model
- 3207 (96.39%)	       0.475

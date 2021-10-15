@@ -1,8 +1,0 @@
-Dataset: citeseer
-citeseer train: 120 val:500 test:1000
-
-Dataset: cora
-cora train: 140 val:500 test:1000
-
-Dataset: pubmed
-pubmed train: 60 val:500 test:1000

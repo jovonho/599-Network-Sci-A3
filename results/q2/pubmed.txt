@@ -1,4 +1,0 @@
-pubmed N=19717, E=44327
-
-Algorithm                	Mean AUC       	Runtime
-adamic_adar_index        		0.6352         		29.22s

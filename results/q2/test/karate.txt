@@ -1,4 +1,0 @@
-karate N=34, E=78
-
-Algorithm                	Mean AUC       
-Stacking model           	0.645          

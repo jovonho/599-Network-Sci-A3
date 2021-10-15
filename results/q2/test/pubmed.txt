@@ -1,9 +1,0 @@
-pubmed N=19717, E=44327
-
-Algorithm                		Mean AUC       		Runtime
-resource_allocation_index	0.6362         	31.126s
-jaccard_coefficient      	0.6357         	30.061s
-adamic_adar_index        	0.6344         	29.782s
-preferential_attachment  	0.7176         	31.646s
-cn_soundarajan_hopcroft  	0.6344         	32.243s
-ra_index_soundarajan_hopcroft	0.605          	32.285s
